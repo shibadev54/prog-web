@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Geometria</title>
+</head>
+<body>
+
+<h2>Calculadora de Área</h2>
+
+<input id="tipo" placeholder="quadrado, retangulo ou circulo">
+<button onclick="criarCampos()">Escolher</button>
+
+<div id="campos"></div>
+
+<br>
+<button onclick="calcular()">Calcular</button>
+
+<p id="resultado"></p>
+
+<script>
+
+function criarCampos(){
+    let tipo = document.getElementById("tipo").value.toLowerCase();
+    let area = document.getElementById("campos");
+
+    area.innerHTML = ""; // limpa os inputs antigos
+
+    if(tipo === "quadrado"){
+        let input = document.createElement("input");
+        input.type = "number";
+        input.placeholder = "Lado";
+        input.id = "lado";
+        area.appendChild(input);
+    }
+
+    else if(tipo === "retangulo"){
+        let input1 = document.createElement("input");
+        input1.type = "number";
+        input1.placeholder = "Base";
+        input1.id = "base";
+
+        let input2 = document.createElement("input");
+        input2.type = "number";
+        input2.placeholder = "Altura";
+        input2.id = "altura";
+
+        area.appendChild(input1);
+        area.appendChild(document.createElement("br"));
+        area.appendChild(input2);
+    }
+
+    else if(tipo === "circulo"){
+        let input = document.createElement("input");
+        input.type = "number";
+        input.placeholder = "Raio";
+        input.id = "raio";
+        area.appendChild(input);
+    }
+}
+
+function calcular(){
+    let tipo = document.getElementById("tipo").value.toLowerCase();
+    let resultado = document.getElementById("resultado");
+
+    if(tipo === "quadrado"){
+        let lado = Number(document.getElementById("lado").value);
+        resultado.innerText = "Área: " + (lado * lado);
+    }
+
+    else if(tipo === "retangulo"){
+        let base = Number(document.getElementById("base").value);
+        let altura = Number(document.getElementById("altura").value);
+        resultado.innerText = "Área: " + (base * altura);
+    }
+
+    else if(tipo === "circulo"){
+        let raio = Number(document.getElementById("raio").value);
+        let area = Math.PI * raio * raio;
+        resultado.innerText = "Área: " + area.toFixed(2);
+    }
+}
+
+</script>
+
+</body>
+</html>
