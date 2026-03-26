@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="calculadora.css">
+</head>
+<body style="background-color: black;">
+   <div class="container">
+   <input id="n1" type="number" placeholder="Número 1">
+<input id="n2" type="number" placeholder="Número 2">
+
+<br><br>
+
+<button onclick="calcular('+')">+</button>
+<button onclick="calcular('-')">-</button>
+<button onclick="calcular('*')">*</button>
+<button onclick="calcular('/')">/</button>
+<hr>
+<h2 id="resultado">Resultado: </h2>
+   </div>
+    <script>
+  function calcular(operacao) {
+    let num1 = Number(document.getElementById("n1").value);
+    let num2 = Number(document.getElementById("n2").value);
+
+    const operacoes = {
+        "+": (a, b) => a + b,
+        "-": (a, b) => a - b,
+        "*": (a, b) => a * b,
+        "/": (a, b) => b !== 0 ? a / b : "Erro: divisão por zero"
+    };
+
+    let resultado = operacoes[operacao](num1, num2);
+
+    document.getElementById("resultado").innerText = "Resultado: " + resultado;
+}
+
+    </script>
+</body>
+</html>

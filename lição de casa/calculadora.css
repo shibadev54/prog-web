@@ -1,0 +1,16 @@
+input{
+    border-radius: 90px 90px 90px 90px;
+    margin-right: 40px;
+    margin-left: 40px;
+    background-color: crimson;
+}
+.container{
+    background-color: purple;
+    display: flex;
+    flex-wrap: wrap;
+}
+button{
+    border: solid 2px;
+    background-color: crimson;
+    border-radius: 50px 0px 50px 0px;
+}
