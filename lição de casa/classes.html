@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,14 +18,15 @@
         background-color: blue;
         border-radius: 10px;
         font-size: larger;
-        margin-left: 1340px;
+        margin-left: 90%;
         flex-wrap: nowrap;
         height: 40px;
     }
 
        header{
         display: flex;
-        flex-wrap: nowrap;
+        align-content: center;
+
        }
       .cabecalho{
         background-color: gray;;
@@ -41,16 +42,19 @@
         background: transparent;
         font-size: 40px;
        }
-       .form{}
-    </style>
+    h1{
+     white-space: nowrap;
+    min-width: 0;
+       }
+     </style>
 </head>
 <body style=" background-color:gray">
 <main>
     <header><h1>cadastro de usuários</h1>
     <button class="incluir" onclick="form()" >incluir</button></header>
-    <div class="cabecalho"><h2>Nome</h2> <h2 style="margin-left: 38cm;">editar</h2> <h2 style="margin-left: 50px;">excluir</h2>
+    <div class="cabecalho"><h2>Nome</h2> <h2 style="margin-left: 85%;">editar</h2> <h2 style="margin-left: 3%;">excluir</h2>
     </div>
-        <div class="users"> <p>Julia</p> <button style="margin-left: 39cm;"> &#x270E;</button><button style="margin-left: 50px;"> &#128465</button> </div>
+        <div class="users"> <p>Julia</p> <button style="margin-left: 86%;"> &#x270E;</button><button style="margin-left: 4%;"> &#128465</button> </div>
     </main>
     <script>
     function form(){
