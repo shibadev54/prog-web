@@ -71,6 +71,14 @@ h1 {
 body {
   background: #555;
 }
+ dialog button{
+   color:white;
+   background-color:blue;
+   padding:0px 30px 0px 30px;
+ }
+ input{
+   background-color:transparent;
+ }
 </style>
 </head>
 
@@ -95,11 +103,16 @@ body {
     <button>&#128465</button>
   </div>
 </div>
-<dialog><h1>oculto</h1>
-<button id="fechamodal"> fechar</button>
+<dialog><h2>nome</h2>
+  <input>
+  <h2>função</h2>
+  <input>
+  <h2>salário</h2>
+  <input><br>
+  <center><button id="fechamodal"> salvar</button></center>
 </dialog>
 </main>
-
+  <!- padding no botao, input invisivel e 1px de borda no topo->
 <script>
 let abremodal = document.getElementById("abremodal");
 let modal = document.getElementsByTagName("dialog");
