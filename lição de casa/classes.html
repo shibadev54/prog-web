@@ -80,7 +80,7 @@ body {
 
 <header>
   <h1>Cadastro de usuários</h1>
-  <button class="incluir" onclick="form()">Incluir</button>
+  <button id="abremodal" class="incluir" onclick="form()">Incluir</button>
 </header>
 
 <div class="cabecalho">
@@ -95,10 +95,17 @@ body {
     <button>&#128465</button>
   </div>
 </div>
-
+<dialog><h1>oculto</h1>
+<button id="fechamodal"> fechar</button>
+</dialog>
 </main>
 
-
-
+<script>
+let abremodal = document.getElementById("abremodal");
+let modal = document.getElementsByTagName("dialog");
+let fechamodal = document.getElementById("fechamodal");
+abremodal.onclick = () => modal[0].showModal();
+fechamodal.onclick = () => modal[0].close();
+</script>
 </body>
 </html>
