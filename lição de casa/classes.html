@@ -74,16 +74,21 @@ body {
  dialog button{
    color:white;
    background-color:blue;
-   padding:0px 30px 0px 30px;
+   width: 100%;
+   border:none;
+   border-radius: 10px;
  }
  input{
-   background-color:transparent;
+   background: transparent;
+   border:none;
+   border-top: solid 1px;
+   width: 100%;
  }
 dialog {
   border: none;
   border-radius: 8px;
   padding: 20px;
-  width: 300px;
+  width: 50%;
   box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
  dialog::backdrop {
@@ -113,22 +118,31 @@ dialog {
     <button>&#128465</button>
   </div>
 </div>
-<dialog><h2>nome</h2>
-  <input>
-  <h2>função</h2>
-  <input>
-  <h2>salário</h2>
-  <input><br>
+<dialog><label>nome</label>
+  <input class="pegardados">
+  <label>função</label>
+  <input class="pegardados">
+  <label>salário</label>
+  <input class="pegardados"><br>
   <center><button id="fechamodal"> salvar</button></center>
 </dialog>
 </main>
-  <!- padding no botao, input invisivel e 1px de borda no topo->
 <script>
+let usuario = [
+  {nome}
+]
 let abremodal = document.getElementById("abremodal");
 let modal = document.getElementsByTagName("dialog");
 let fechamodal = document.getElementById("fechamodal");
 abremodal.onclick = () => modal[0].showModal();
-fechamodal.onclick = () => modal[0].close();
+fechamodal.onclick = function() {
+  function add(){
+
+  }
+  modal[0].close();
+};
+
+
 </script>
 </body>
 </html>
