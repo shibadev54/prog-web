@@ -1,0 +1,75 @@
+* { box-sizing: border-box; }
+body {
+  background: #555;
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+main {
+  width: 95%;
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 30px;
+  background: white;
+  border-radius: 15px;
+}
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.incluir {
+  padding: 12px 20px;
+  font-size: 16px;
+  border-radius: 8px;
+  background-color: blue;
+  color: white;
+}/*  */
+.cabecalho {
+ display: grid;
+  grid-template-columns: 1fr 1fr 1fr auto;
+  align-items: center;
+  gap: 10px;
+  margin-top: 30px;
+  font-weight: bold;
+}/**/
+.user {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr auto;
+  align-items: center;
+  gap: 10px;
+  padding: 15px 0;
+  border-bottom: 1px solid #ddd;
+}
+.actions {
+  display: flex;
+  gap: 15px;
+}
+.user button {
+  border: none;
+  background: transparent;
+  font-size: 30px;
+  cursor: pointer;
+}
+dialog {
+  border: none;
+  border-radius: 8px;
+  padding: 20px;
+  width: 50%;
+}
+dialog::backdrop {
+  background: rgba(0,0,0,0.5);
+}
+dialog button {
+  background: blue;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 8px;
+  width: 100%;
+}
+input {
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid #000;
+  margin-bottom: 10px;
+}

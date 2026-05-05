@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cadastro</title>
+<link rel="stylesheet" href="crud.css">
+</head>
+<body>
+<main>
+<header>
+  <h1>Cadastro de usuários</h1>
+  <button data-open="create" class="incluir">Incluir</button>
+</header>
+<div class="cabecalho">
+  <span>Nome</span>
+  <span>funcão</span>
+  <span>salario</span>
+  <span>editar excluir</span>
+</div>
+  <div id="listaUsuarios">
+
+  <div class="user">
+    <p>Julia</p> <p>contadora</p> <p>1200R$</p>
+    <div class="actions">
+      <button data-open="edit">&#x270E</button>
+      <button data-open="delete">&#128465</button>
+    </div>
+  </div>
+
+</div>
+<dialog id="create">
+  <label>Nome</label>
+  <input id="nomeC" type="text">
+  <label>Função</label>
+  <input id="funcaoC" type="text">
+  <label>Salário</label>
+  <input id="salarioC" type="text">
+  <br>
+  <button data-close id="save">Salvar</button>
+</dialog>
+<dialog id="edit">
+ <label>Nome</label>
+  <input id="nomeE" type="text">
+  <label>Função</label>
+  <input id="funcaoE" type="text">
+  <label>Salário</label>
+  <input id="salarioE" type="text">
+  <br>
+  <button data-close>Salvar</button>
+</dialog>
+<dialog id="delete">
+  <h2>Tem certeza?</h2>
+  <button data-close>Cancelar</button>
+  <button data-close>Excluir</button>
+</dialog>
+</main>
+<script src="crud.js"></script>
+</body>
+</html>

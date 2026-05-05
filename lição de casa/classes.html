@@ -4,14 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Cadastro</title>
-
 <style>
-* {
-  box-sizing: border-box;
-}
+  * { box-sizing: border-box; }
 
 body {
-  background-color: gray;
+  background: #555;
   margin: 0;
   font-family: Arial, sans-serif;
 }
@@ -24,6 +21,7 @@ main {
   background: white;
   border-radius: 15px;
 }
+
 header {
   display: flex;
   justify-content: space-between;
@@ -36,113 +34,202 @@ header {
   border-radius: 8px;
   background-color: blue;
   color: white;
-
 }
 
-.cabecalho {
-  display: flex;
-  justify-content: space-between;
+table {
+  width: 100%;
+  border-collapse: collapse;
   margin-top: 30px;
-  font-weight: bold;
 }
 
-.users {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px 0;
+thead {
+  background: #eee;
+}
+
+th, td {
+  text-align: left;
+  padding: 12px;
   border-bottom: 1px solid #ddd;
 }
-.actions {
-  display: flex;
-  gap: 15px;
-}
 
-.users button {
+td button {
   border: none;
   background: transparent;
-  font-size: 40px;
+  font-size: 20px;
   cursor: pointer;
 }
 
-h1 {
-  margin: 0;
-}
-body {
-  background: #555;
-}
- dialog button{
-   color:white;
-   background-color:blue;
-   width: 100%;
-   border:none;
-   border-radius: 10px;
- }
- input{
-   background: transparent;
-   border:none;
-   border-top: solid 1px;
-   width: 100%;
- }
 dialog {
   border: none;
   border-radius: 8px;
   padding: 20px;
   width: 50%;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
- dialog::backdrop {
-  background-color: rgba(0, 0, 0, 0.5);
+
+dialog::backdrop {
+  background: rgba(0,0,0,0.5);
+}
+
+dialog button {
+  background: blue;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 8px;
+  width: 100%;
+}
+
+input {
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid #000;
+  margin-bottom: 10px;
 }
 </style>
 </head>
-
 <body>
 
 <main>
-
 <header>
   <h1>Cadastro de usuários</h1>
-  <button id="abremodal" class="incluir" onclick="form()">Incluir</button>
+  <button data-open="create" class="incluir">Incluir</button>
 </header>
 
-<div class="cabecalho">
-  <span>Nome</span>
-  <span>editar deletar</span>
-</div>
+<table>
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>Função</th>
+      <th>Salário</th>
+      <th>Ações</th>
+    </tr>
+  </thead>
+  <tbody id="listaUsuarios">
+    <tr>
+      <td>Julia</td>
+      <td>repositora</td>
+      <td>1200R$</td>
+      <td>
+        <button data-open="edit">✎</button>
+        <button data-open="delete">🗑</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
-<div class="users">
-  <p>Julia</p>
-  <div class="actions">
-    <button>&#x270E</button>
-    <button>&#128465</button>
-  </div>
-</div>
-<dialog><label>nome</label>
-  <input class="pegardados">
-  <label>função</label>
-  <input class="pegardados">
-  <label>salário</label>
-  <input class="pegardados"><br>
-  <center><button id="fechamodal"> salvar</button></center>
+<dialog id="create">
+  <label>Nome</label>
+  <input id="nomeC" type="text">
+  <label>Função</label>
+  <input id="funcaoC" type="text">
+  <label>Salário</label>
+  <input id="salarioC" type="text">
+  <br>
+  <button data-close id="save">Salvar</button>
 </dialog>
+
+<dialog id="edit">
+  <label>Nome</label>
+  <input id="nomeE" type="text">
+  <label>Função</label>
+  <input id="funcaoE" type="text">
+  <label>Salário</label>
+  <input id="salarioE" type="text">
+  <br>
+  <button data-close id="update">Salvar</button>
+</dialog>
+
+<dialog id="delete">
+  <h2>Tem certeza?</h2>
+  <button data-close>Cancelar</button>
+  <button data-close id="confirmDelete">Excluir</button>
+</dialog>
+
 </main>
+
 <script>
-let usuario = [
-  {nome}
-]
-let abremodal = document.getElementById("abremodal");
-let modal = document.getElementsByTagName("dialog");
-let fechamodal = document.getElementById("fechamodal");
-abremodal.onclick = () => modal[0].showModal();
-fechamodal.onclick = function() {
-  function add(){
+let usuarios = [];
+let indexAtual = null;
 
+document.addEventListener("click", (e) => {
+
+  const openBtn = e.target.closest("[data-open]");
+  if (openBtn) {
+    const id = openBtn.dataset.open;
+
+    if (id === "edit") {
+      indexAtual = openBtn.closest("tr").dataset.index;
+      preencherEdit(indexAtual);
+    }
+
+    if (id === "delete") {
+      indexAtual = openBtn.closest("tr").dataset.index;
+    }
+
+    document.getElementById(id).showModal();
   }
-  modal[0].close();
-};
 
+  const closeBtn = e.target.closest("[data-close]");
+  if (closeBtn) {
+    closeBtn.closest("dialog").close();
+  }
 
+  if (e.target.id === "save") create();
+  if (e.target.id === "update") update();
+  if (e.target.id === "confirmDelete") remove();
+});
+
+function render() {
+  let container = document.getElementById("listaUsuarios");
+  container.innerHTML = "";
+
+  usuarios.forEach((u, index) => {
+    container.innerHTML += `
+      <tr data-index="${index}">
+        <td>${u.nome}</td>
+        <td>${u.funcao}</td>
+        <td>${u.salario}R$</td>
+        <td>
+          <button data-open="edit">✎</button>
+          <button data-open="delete">🗑</button>
+        </td>
+      </tr>
+    `;
+  });
+}
+
+function create() {
+  let usuario = {
+    nome: document.getElementById("nomeC").value,
+    funcao: document.getElementById("funcaoC").value,
+    salario: document.getElementById("salarioC").value
+  };
+
+  usuarios.push(usuario);
+  render();
+}
+
+function preencherEdit(index) {
+  let u = usuarios[index];
+  document.getElementById("nomeE").value = u.nome;
+  document.getElementById("funcaoE").value = u.funcao;
+  document.getElementById("salarioE").value = u.salario;
+}
+
+function update() {
+  usuarios[indexAtual] = {
+    nome: document.getElementById("nomeE").value,
+    funcao: document.getElementById("funcaoE").value,
+    salario: document.getElementById("salarioE").value
+  };
+
+  render();
+}
+
+function remove() {
+  usuarios.splice(indexAtual, 1);
+  render();
+}
 </script>
 </body>
 </html>
