@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Cadastro de Funcionários</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Main Dashboard Table -->
+        <div class="card main-card">
+            <div class="card-header">
+                <h2>Cadastro de Funcionários</h2>
+                <button id="btn-incluir" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Incluir</button>
+            </div>
+            <div class="card-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Função</th>
+                            <th>Salário</th>
+                            <th class="text-center">Editar</th>
+                            <th class="text-center">Excluir</th>
+                        </tr>
+                    </thead>
+                    <tbody id="employee-table-body">
+                        <!-- Dynamic content injected by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Form (Inclusão / Edição) -->
+    <div id="employee-modal" class="modal">
+        <div class="modal-content">
+            <form id="employee-form">
+                <input type="hidden" id="employee-id">
+                
+                <div class="form-group">
+                    <label for="employee-name">Nome</label>
+                    <input type="text" id="employee-name" required autocomplete="off">
+                </div>
+                
+                <div class="form-group">
+                    <label for="employee-role">Função</label>
+                    <input type="text" id="employee-role" required autocomplete="off">
+                </div>
+                
+                <div class="form-group">
+                    <label for="employee-salary">Salário</label>
+                    <input type="number" id="employee-salary" step="0.01" required autocomplete="off">
+                </div>
+                
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-submit">Salvar</button>
+                    <button type="button" id="btn-cancel" class="btn btn-cancel">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
