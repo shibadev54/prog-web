@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Estruturas de Dados e Algoritmos em JS</title>
+</head>
+<body>
+  <h1>Abra o Console do Navegador (F12) para ver a execução!</h1>
+
+  <script>
+    console.log("=== 1. ARRAYS ===");
+    const arrayDinamico = [10, "Texto", true];
+    console.log("Array dinâmico:", arrayDinamico);
+
+    console.log("\n=== 2. LISTAS LIGADAS (Simples, Dupla, Circular e Encadeada) ===");
+    // Nó básico para Lista Encadeada Simples
+    class No {
+      constructor(valor) {
+        this.valor = valor;
+        this.proximo = null;
+      }
+    }
+    // Nó para Lista Duplamente Encadeada
+    class NoDuplo extends No {
+      constructor(valor) {
+        super(valor);
+        this.anterior = null;
+      }
+    }
+
+    // Exemplo manual de Lista Ligada Simples: 10 -> 20 -> null
+    const no1 = new No(10);
+    const no2 = new No(20);
+    no1.proximo = no2;
+    console.log("Lista Ligada (Primeiro nó aponta para o segundo):", no1);
+
+    // Na Lista Circular, o último nó apontaria de volta para o no1 (no2.proximo = no1).
+
+    console.log("\n=== 3. PILHA (LIFO) ===");
+    const pilha = [];
+    pilha.push("Prato 1"); // Adiciona no topo
+    pilha.push("Prato 2");
+    console.log("Pilha após pushes:", pilha);
+    console.log("Elemento removido do topo (pop):", pilha.pop());
+
+    console.log("\n=== 4. FILA (FIFO) ===");
+    const fila = [];
+    fila.push("Cliente A"); // Entra na fila
+    fila.push("Cliente B");
+    console.log("Fila após pushes:", fila);
+    console.log("Atendido/Removido do início (shift):", fila.shift());
+
+    console.log("\n=== 5. ALOCAÇÃO DINÂMICA E GARBAGE COLLECTOR ===");
+    let objetoDinamico = { item: "Alocado na memória" };
+    console.log("Objeto em uso:", objetoDinamico);
+    objetoDinamico = null; // Libera a referência; o Garbage Collector limpa a memória automaticamente.
+    console.log("Referência removida (objetoDinamico = null)");
+
+    console.log("\n=== 6. RECURSIVIDADE ===");
+    function fatorial(n) {
+      if (n <= 1) return 1; // Caso base (condição de parada)
+      return n * fatorial(n - 1); // Chamada recursiva
+    }
+    console.log("Fatorial de 5 (recursivo):", fatorial(5));
+
+    console.log("\n=== 7. TABELA DE ESPALHAMENTO (HASH TABLE) ===");
+    const tabelaHash = new Map();
+    tabelaHash.set("usuario_101", "Ana Maria");
+    tabelaHash.set("usuario_102", "Carlos");
+    console.log("Busca rápida por chave na Hash Table:", tabelaHash.get("usuario_101"));
+
+    console.log("\n=== 8. ÁRBORES (TREES) ===");
+    class NoArvore {
+      constructor(valor) {
+        this.valor = valor;
+        this.filhos = [];
+      }
+    }
+    const raiz = new NoArvore("Raiz");
+    const filho1 = new NoArvore("Filho 1");
+    raiz.filhos.push(filho1);
+    console.log("Estrutura de Árvore Simples:", raiz);
+
+    console.log("\n=== 9. MÉTODOS DE ORDENAÇÃO ===");
+    const numerosDesordenados = [40, 10, 50, 20, 30];
+    
+    // Algoritmo Bubble Sort (Manual)
+    function bubbleSort(arr) {
+      let lista = [...arr];
+      for (let i = 0; i < lista.length; i++) {
+        for (let j = 0; j < lista.length - 1; j++) {
+          if (lista[j] > lista[j + 1]) {
+            let temp = lista[j];
+            lista[j] = lista[j + 1];
+            lista[j + 1] = temp;
+          }
+        }
+      }
+      return lista;
+    }
+    console.log("Bubble Sort (Manual):", bubbleSort(numerosDesordenados));
+    console.log("Ordenação Nativa JS (.sort):", [...numerosDesordenados].sort((a, b) => a - b));
+
+    console.log("\n=== 10. MÉTODOS DE BUSCA ===");
+    const listaBusca = [10, 20, 30, 40, 50];
+
+    // Busca Linear (Manual)
+    function buscaLinear(arr, alvo) {
+      for (let i = 0; i < arr.length; i++) {
+        if (arr[i] === alvo) return i;
+      }
+      return -1;
+    }
+
+    // Busca Binária (Manual em lista ordenada)
+    function buscaBinaria(arr, alvo) {
+      let inicio = 0;
+      let fim = arr.length - 1;
+
+      while (inicio <= fim) {
+        let meio = Math.floor((inicio + fim) / 2);
+        if (arr[meio] === alvo) return meio;
+        if (arr[meio] < alvo) inicio = meio + 1;
+        else fim = meio - 1;
+      }
+      return -1;
+    }
+
+    console.log("Índice do valor 30 (Busca Linear):", buscaLinear(listaBusca, 30));
+    console.log("Índice do valor 30 (Busca Binária):", buscaBinaria(listaBusca, 30));
+    console.log("Busca Nativa JS (.includes):", listaBusca.includes(30));
+  </script>
+</body>
+</html>
